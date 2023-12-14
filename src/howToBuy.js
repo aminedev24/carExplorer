@@ -49,14 +49,16 @@ const CarBuyingSteps = () => {
           </Typography>
         </div>
       </Paper>
-
-      <Grid container spacing={4} style={{ marginTop: '2rem' }}>
+      <div className='second-header'>
+        <Grid container spacing={4} style={{ marginTop: '2rem' }}>
         <Grid item xs={12} md={12}>
           <Typography variant="h3" align="center" style={{ fontWeight: 'bold' }}>
             Buy a car from Ichinomiya Motors in 5 Easy Steps.
           </Typography>
         </Grid>
       </Grid>
+      </div>
+      
       <hr className="my-4" />
 
       <Grid container spacing={4}>

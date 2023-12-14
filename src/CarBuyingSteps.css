@@ -100,6 +100,28 @@
 
 /* Add additional styling if needed */
 
+@media screen and (max-width :500px) {
+    .main-title {
+        font-size: 16px !important;
+    }
+
+    .overlay-text {
+        top: 70%;
+    }
+
+    .overlay-text h5 {
+        font-size: 17px;
+    }
+
+    .overlay-text p {
+        font-size: 12px;
+    }
+
+    .second-header h3 {
+        font-size: 23px !important;
+    }
+
+}
 @media screen and (max-width: 995px) {
 
     .overlay-text {
@@ -108,6 +130,7 @@
 
     .custom-img {
         width: auto;
+        min-width: auto;
     }
     /* Responsive styles for main paper */
     .main-title {
