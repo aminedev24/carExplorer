@@ -99,20 +99,16 @@
 /* Add additional styling if needed */
 
 @media screen and (max-width :500px) {
+
+    .main-image {
+        height: 150px;
+    }
     .main-title {
         font-size: 16px !important;
     }
 
     .overlay-text {
-        top: 70%;
-    }
-
-    .overlay-text h5 {
-        font-size: 17px;
-    }
-
-    .overlay-text p {
-        font-size: 12px;
+        top: 60% !important;
     }
 
     .second-header h3 {
@@ -129,6 +125,7 @@
     .custom-img {
         width: auto;
         min-width: auto;
+        
     }
     /* Responsive styles for main paper */
     .main-title {
