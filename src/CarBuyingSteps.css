@@ -30,8 +30,6 @@
 /* Add styling for the steps text */
 .custom-img {
     width: 100%;
-    max-width: 376px;
-    /* Adjust as needed */
     height: 221px;
     /* Adjust as needed */
     object-fit: cover;
