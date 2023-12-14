@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/aminedev24/carExplorer/static/css/main.d1f2c8f4.css",
+    "main.js": "/aminedev24/carExplorer/static/js/main.e3044ab4.js",
+    "static/js/787.646ebb84.chunk.js": "/aminedev24/carExplorer/static/js/787.646ebb84.chunk.js",
+    "index.html": "/aminedev24/carExplorer/index.html",
+    "main.d1f2c8f4.css.map": "/aminedev24/carExplorer/static/css/main.d1f2c8f4.css.map",
+    "main.e3044ab4.js.map": "/aminedev24/carExplorer/static/js/main.e3044ab4.js.map",
+    "787.646ebb84.chunk.js.map": "/aminedev24/carExplorer/static/js/787.646ebb84.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d1f2c8f4.css",
+    "static/js/main.e3044ab4.js"
+  ]
+}
