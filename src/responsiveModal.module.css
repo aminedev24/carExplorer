@@ -1,0 +1,436 @@
+/* ResponsiveModal.css */
+.modal {
+    position: fixed;
+    top: 14%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+}
+
+.fbRoot {
+    position: absolute;
+    right: 7%;
+    top: 50%;
+}
+
+.dealsAndcontainer {
+    position: absolute;
+    width: 45%;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+}
+
+.modalHeader h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.modalHeader button:hover {
+    background-color: #c0392b;
+}
+
+
+/* Updated styles for the search dealsAndcontainer */
+.searchContainer {
+    display: flex;
+    align-items: center;
+    /* Added to align items at the center */
+    border-radius: 10px;
+    
+}
+
+.searchIcon {
+    margin-left: 5px;
+    /* Adjusted margin to place the icon to the right */
+    cursor: pointer;
+}
+
+/* Adjustments for larger screens */
+/* Updated styles for larger screens */
+
+@media screen and (min-width: 1000px) and (max-width: 1400px) {
+    .dealsAndcontainer {
+        left: 25% !important;
+        top: 32% !important;
+        width: 45%;
+    }
+}
+
+@media screen and (max-width:900px) {
+    .dealsAndcontainer {
+        width: 60% !important;
+    }
+    
+}
+
+@media screen and (max-width:760px) {
+    .dealsAndcontainer {
+        width: 100% !important;
+        text-align: center;
+    }
+
+}
+
+
+@media screen and (min-width: 900px) {
+    .searchContainer {
+        width: 60%;
+        /* Adjusted width for larger screens */
+    }
+
+    .modalHeader {
+        position: relative;
+        top: 70px;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 70%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        /*max-width: 420px;*/
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.2);
+        border-radius: 50px;
+    
+    }
+    .contentHeader {
+        font-size: 24px;
+    }
+
+    .searchContainer {
+        font-size: 18px;
+        /* Adjust the font size as needed */
+    }
+
+    .filterContainer {
+        font-size: 25px;
+    }
+
+    .searchIcon {
+        font-size: 24px;
+        /* Adjust the font size as needed */
+    }
+
+    input {
+        font-size: 30px;
+        /* Adjust the font size as needed */
+        background-color: unset;
+    }
+
+    .searchInput {
+        font-size: 16px;
+        width: 80%;
+        border-radius: 5px;
+        outline: none;
+        transition: border-color 0.3s ease-in-out;
+    }
+}
+
+input {
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.filterContainer {
+    display: flex;
+    align-items: center;
+    color: #fff;
+    cursor: pointer;
+}
+
+.filterIcon {
+    margin-right: 5px;
+    color: #2980b9;
+}
+
+.modalContent {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.contentHeader {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.backIcon {
+    cursor: pointer;
+}
+
+.resetButton {
+    background-color: #e74c3c;
+    color: #fff;
+    border: none;
+    padding: 1px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    
+}
+
+.markersContainer {
+    overflow-y: auto;
+    overflow-x: auto;
+    justify-content: start;
+    gap: .5rem;
+    margin: 15% 0;
+    align-items: center;
+    flex-direction: column;
+}
+
+.markerButton {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    border: 1px solid #ddd;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    border-radius: 15px;
+    text-transform: uppercase;
+}
+
+.markerButton span {
+    margin-right: 10px;
+}
+
+.markerImage {
+    width: 40px;
+}
+
+@media screen and (min-width: 900px) {
+    .modal {
+        width: 25%;
+        position: relative;
+    }
+
+    .dealsAndcontainer {
+        left: 25%;
+    }
+
+    .backIcon {
+        display: none;
+    }
+
+    .contentHeader,
+    .markersContainer,
+    .inputsFlex input,
+    .markerSelect,
+    .searchButton {
+        font-size: 15px;
+    }
+}
+
+@media screen and (min-width: 1500px) {
+    .modal {
+        width: 25%;
+    }
+
+    .contentHeader , .markersContainer,.inputsFlex input,.markerSelect, .searchButton {
+        font-size: 21px;
+    }
+
+    .contentHeader h2 , .resetButton {
+        font-size: 25px;
+    }
+
+    .markersHeader {
+        background-color: darkblue;
+        color: #fff;
+        padding: 20px;
+        border-radius: 40px;
+    }
+
+   .markerSelect {
+    width: 60%;
+   }
+
+  
+
+   
+}
+
+/* Add this to your existing ResponsiveModal.css or create a new CSS file */
+
+.filtersContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.searchAccuracy,
+.modelSelection,
+.yearRange,
+.priceRange,
+.searchButton {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.markerSelect {
+    width: 50%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 5px;
+    position: relative;
+}
+
+.markerSelect option , .inputsFlex option {
+    position: absolute;
+    top: 100%;
+    left: 0;
+   
+}
+
+/* Add this to your existing ResponsiveModal.css or create a new CSS file */
+
+.inputContainer {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    /* Header background color */
+    color: #fff;
+}
+
+.inputsFlex input {
+    flex: 1;
+    /* Add this line to allow the input to take up available space */
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+
+.inputsFlex {
+    display: flex;
+    gap: 10px;
+}
+
+.priceRange,
+.yearRange {
+    margin-top: 20px;
+}
+
+.searchButton {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.searchIcon {
+    margin-right: 5px;
+}
+
+button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Adjustments for larger screens */
+@media screen and (min-width: 900px) {
+
+    .searchAccuracy,
+    .modelSelection,
+    .yearRange,
+    .priceRange,
+    .searchButton {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 20px;
+    }
+    .yearRange , .priceRange {
+        color:black;
+        align-self: flex-start;
+        
+    }
+
+    .markersContainer {
+        flex-direction: column;
+    }
+}
+
+
+/* Add this to your existing ResponsiveModal.css or create a new CSS file */
+.priceSection {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdownContainer {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dropdownHeader {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #3498db;
+    color: #fff;
+    border-radius: 5px;
+}
+
+.dropdownIcon {
+    font-size: 18px;
+}
+
+.rangeSliderContainer {
+    padding: 10px;
+    width: 100%;
+    /* Takes available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center
+}
+
+.rangeSlider {
+    width: 100%;
+}
+
+.rangeValue {
+    margin-top: 10px;
+    text-align: center;
+}
+
+.markers {
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+}
+
+.dropdownAndRangeContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}

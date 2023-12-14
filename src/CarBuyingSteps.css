@@ -1,0 +1,141 @@
+.custom-img {
+    min-width: 600px;
+    min-height: 320px;
+}
+
+.container-fluid {
+    background-color: #f3f3f7;
+}
+
+.scaleDown {
+    object-fit: scale-down !important;
+    background-color: #fff;
+}
+
+.custom-text {
+    color: #333;
+    line-height: 1.7;
+    font-size: 23px;
+    /* Set the line height for better readability */
+    margin-top: 24px !important;
+    /* Add margin at the top of the text */
+}
+
+.mb-4 {
+    margin-bottom: 30px;
+}
+
+/* CarBuyingSteps.css */
+
+/* Add styling for the steps text */
+.custom-img {
+    width: 100%;
+    max-width: 376px;
+    /* Adjust as needed */
+    height: 221px;
+    /* Adjust as needed */
+    object-fit: cover;
+}
+
+.custom-text {
+    margin-right: 85px;
+}
+
+
+/* Add margin between the image and text */
+.img-container {
+    margin-right: 50px;
+}
+
+/* Ensure the text takes up the remaining space */
+.text-container {
+    flex-grow: 1;
+    margin-top: 20px;
+}
+
+.text-container p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Main paper styles */
+.main-paper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 15px;
+}
+
+.main-title {
+    background-color: #2196F3;
+    color: white;
+    border-radius: 15px 15px 0 0;
+    text-align: center;
+    padding: 1rem;
+}
+
+.main-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-Radius: 0 0 15px 15px;
+}
+
+.overlay-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 1rem;
+    color: white;
+    text-align: center;
+}
+
+/* Additional styles for steps */
+.step-paper {
+    display: flex;
+    padding: 1rem;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+/* Add additional styling if needed */
+
+@media screen and (max-width: 995px) {
+
+    .overlay-text {
+        top: 75%;
+    }
+
+    .custom-img {
+        width: auto;
+    }
+    /* Responsive styles for main paper */
+    .main-title {
+        border-radius: 15px;
+        /* Adjust as needed */
+    }
+
+    .main-image {
+        border-radius: 15px;
+        /* Adjust as needed */
+    }
+
+    .overlay-text {
+        padding: 1rem;
+    }
+
+    /* Responsive styles for steps */
+    .step-paper {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-container {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .text-container {
+        margin-right: 0;
+    }
+}
