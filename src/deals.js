@@ -145,21 +145,30 @@ useEffect(() => {
             </div>
           ))
         ) : (
-          <Typography
-            variant="subtitle1"
+         <div
             style={{
-              textAlign: 'center',
-              padding: '20px',
-              border: '1px solid #ccc',
-              borderRadius: '5px',
-              backgroundColor: '#f8d7da', // Light red background color
-              color: '#721c24', // Dark red text color
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              height: '50vh', // Adjust the height based on your needs
             }}
           >
-            Sorry, there's no car available at the moment.
-          </Typography>
-
-        )}
+          <div
+              style={{
+                textAlign: 'center',
+                padding: '20px',
+                border: '1px solid #ccc',
+                borderRadius: '5px',
+                backgroundColor: '#f8d7da', // Light red background color
+                color: '#721c24', // Dark red text color
+              }}
+            >
+              <Typography variant="subtitle1">
+                Sorry, there's no car available at the moment.
+              </Typography>
+            </div>
+            </div>
+          )}
       </div>
 
     </div>

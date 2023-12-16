@@ -53,28 +53,30 @@ const [filters, setFilters] = useState({
 const applyFilters = () => {
   // Filter the data based on selected filters
   console.log('Selected Marker:', filters.marker);
-  const formattedMarker = filters.marker.toLowerCase();
+
+  // Check if filters.marker is a string before converting to lowercase
+  const formattedMarker = typeof filters.marker === 'string' ? filters.marker.toLowerCase() : '';
 
   const filteredData = cardsData.filter((card) => {
     // Implement your filter conditions here
-    console.log(`Brand: ${card.brand.toLowerCase()}, filters marker: ${formattedMarker}`);
+    //console.log(`Brand: ${card.brand.toLowerCase()}, filters marker: ${formattedMarker}`);
     const markerFilter = !formattedMarker || card.brand.toLowerCase().includes(formattedMarker);
-  
+
     const yearFromFilter = !filters.yearFrom || card.year >= parseInt(filters.yearFrom);
-    
+
     const yearToFilter = !filters.yearTo || card.year <= parseInt(filters.yearTo);
 
     // Convert filters.priceFrom and filters.priceTo to numbers
     const priceFrom = parseFloat(filters.priceFrom);
     const priceTo = parseFloat(filters.priceTo);
 
-    console.log(`Price from: ${priceFrom}, Price to: ${priceTo}, Card FOB: ${card.fob}`);
+    //console.log(`Price from: ${priceFrom}, Price to: ${priceTo}, Card FOB: ${card.fob}`);
     const priceFromFilter = !filters.priceFrom || card.fob >= priceFrom;
 
     const priceToFilter = !filters.priceTo || card.fob <= priceTo;
 
-    console.log(`PriceFromFilter: ${priceFromFilter}, PriceToFilter: ${priceToFilter}`);
-    
+    //console.log(`PriceFromFilter: ${priceFromFilter}, PriceToFilter: ${priceToFilter}`);
+
     return markerFilter && yearFromFilter && yearToFilter && priceFromFilter && priceToFilter;
   });
 
@@ -118,17 +120,30 @@ const handlePriceChange = (e) => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleMarkerChange = (event,value) => {
-  const selectedMarkerValue = event.target.value || value;
+const handleMarkerChange = (event, value) => {
+  // Check if the event is coming from a Checkbox
+  if (event && event.target && event.target.type === 'checkbox') {
+    const selectedMarkerValue = value;
+    setSelectedMarker(selectedMarkerValue);
 
-  setSelectedMarker(selectedMarkerValue);
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      marker: selectedMarkerValue,
+    }));
+  } else {
+    // Handle the case when the event is coming from the Select component
+    const selectedMarkerValue = event.target.value;
+    setSelectedMarker(selectedMarkerValue);
 
-  setFilters((prevFilters) => ({
-    ...prevFilters,
-    marker: selectedMarkerValue,
-  }));
-  applyFilters()
+    setFilters((prevFilters) => ({
+      ...prevFilters,
+      marker: selectedMarkerValue,
+    }));
+  }
 };
+
+
+
 
   useEffect(() => {
     // Apply filters when any filter changes
@@ -348,28 +363,26 @@ const handlePriceChange = (e) => {
                   </div>
 
                   <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-        <h5 style={{ marginRight: '10px' }}>Markers:</h5>
-        <Button onClick={handleToggleMarkers} endIcon={<FaAngleDown />}>
-          {selectedMarker || ''}
-        </Button>
-      </div>
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                      <h5 style={{ marginRight: '10px' }}>Markers:</h5>
+                      <Button onClick={handleToggleMarkers} endIcon={<FaAngleDown />}>
+                        {selectedMarker || ''}
+                      </Button>
+                    </div>
 
-      {showMarkers && (
-        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
-          {markers.map((marker) => (
-            <FormControlLabel
-              key={marker.value}
-              control={<Checkbox checked={selectedMarker === marker.value} />}
-              label={marker.name}
-              onChange={() => handleMarkerChange(marker.value)}
-            />
-          ))}
-        </div>
-      )}
-
-      {/* Rest of your component */}
-    </div>
+                    {showMarkers && (
+                      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+                        {markers.map((marker) => (
+                          <FormControlLabel
+                            key={marker.value}
+                            control={<Checkbox checked={selectedMarker === marker.value} />}
+                            label={marker.name}
+                            onChange={(event) => handleMarkerChange(event, marker.value)}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
                
                  
                 </>
