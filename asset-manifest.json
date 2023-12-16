@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/carExplorer/static/css/main.811d7b6f.css",
-    "main.js": "/carExplorer/static/js/main.abda76ed.js",
-    "static/js/787.646ebb84.chunk.js": "/carExplorer/static/js/787.646ebb84.chunk.js",
-    "index.html": "/carExplorer/index.html",
-    "main.811d7b6f.css.map": "/carExplorer/static/css/main.811d7b6f.css.map",
-    "main.abda76ed.js.map": "/carExplorer/static/js/main.abda76ed.js.map",
-    "787.646ebb84.chunk.js.map": "/carExplorer/static/js/787.646ebb84.chunk.js.map"
+    "main.css": "./static/css/main.37a50fcc.css",
+    "main.js": "./static/js/main.54a062f0.js",
+    "static/js/787.646ebb84.chunk.js": "./static/js/787.646ebb84.chunk.js",
+    "index.html": "./index.html",
+    "main.37a50fcc.css.map": "./static/css/main.37a50fcc.css.map",
+    "main.54a062f0.js.map": "./static/js/main.54a062f0.js.map",
+    "787.646ebb84.chunk.js.map": "./static/js/787.646ebb84.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.811d7b6f.css",
-    "static/js/main.abda76ed.js"
+    "static/css/main.37a50fcc.css",
+    "static/js/main.54a062f0.js"
   ]
 }
