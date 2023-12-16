@@ -13,6 +13,7 @@ import {
   Menu,
   CardMedia} from '@mui/material';
 
+
 const cardData = [
   {
     id: 1,
@@ -20,7 +21,7 @@ const cardData = [
     year: 2006,
     fob: 7000,
     price: 8000,
-    imageUrl:'img/deals/toyoraDyna.jpg',
+    imageUrl:'img/deals/dyna.jpg',
   },
   {
     id: 2,
@@ -28,7 +29,7 @@ const cardData = [
     year: 2008,
     fob: 1500,
     price: 1960,
-    imageUrl: 'img/deals/toyoroNoah.jpg',
+    imageUrl: 'img/deals/toyotoNoah.jpg',
   },
    {
     id: 3,
@@ -36,7 +37,7 @@ const cardData = [
     year: 2018,
     fob: 26000,
     price: 26675,
-    imageUrl: 'img/deals/landCruiserPorado.jpg',
+    imageUrl: 'img/deals/landcruiserprado.jpg',
   },
 
    {
@@ -49,30 +50,56 @@ const cardData = [
   }
 ];
 
+const csvData = `
+Brand,Model,Year,FOB_Min,FOB_Max
+TOYOTA,LAND CRUISER,2023,108600,113888
+TOYOTA,toyota DYNA,2003,6280,6800
+MITSUBISHI,FUSO FIGHTER MIGNON,1999,14000,15500
+TOYOTA,toyota NOAH,2008,1500,1960
+TOYOTA,LAND CRUISER PRADO,2018,26000,26675
+TOYOTA,LAND CRUISER PRADO14,2014,17900,18800
+TOYOTA,toyota CARINA,2001,2210,2590
+MERCEDES BENZ,mercedes E-CLASS,2017,14800,15600
+MERCEDES BENZ,mercedes G-CLASS,2003,17500,18930
+MITSUBISHI,FUSO FIGHTER,2003,8600,8800
+`;
 
-const generateSampleData = (numberOfCards) => {
-  const sampleData = [];
+const rows = csvData.trim().split('\n').slice(1); // Skip header row
 
-  for (let i = 1; i <= numberOfCards; i++) {
-    const card = {
-      id: i,
-      model: `Car Model ${i}`,
-      year: 2000 + i,
-      fob: Math.floor(Math.random() * 30000) + 1000, // Random fob between 1000 and 31000
-      price: Math.floor(Math.random() * 5000) + 15000, // Random price between 15000 and 20000
-      imageUrl: `img/deals/car${i}.jpg`,
-    };
+const cardsData = rows.map((row, id) => {
+  const [brand, model, year, fobMin, fobMax] = row.split(',');
 
-    sampleData.push(card);
-  }
+  const formattedModel = model.replace(/\s+/g, '').toLowerCase();
+  const imageUrl = `img/deals/${formattedModel}.jpg`;
 
-  return sampleData;
-};
+  // Convert fobMin and fobMax to numbers
+  const parsedFobMin = parseFloat(fobMin, 10);
+  const parsedFobMax = parseFloat(fobMax, 10);
 
-// Example: Generate 5 sample cards
-//const cardData = generateSampleData(5);
+  // Format the FOB prices and prices using toLocaleString
+  const formattedFobMin = parsedFobMin.toLocaleString();
+  const formattedFobMax = parsedFobMax.toLocaleString();
 
-console.log(generateSampleData(5));
+  console.log(formattedFobMax, formattedFobMin);
+
+  return {
+    id: id + 1,
+    brand: brand.trim(),
+    model: model.trim(),
+    year: parseFloat(year.trim(), 10),
+    fob: parsedFobMin,
+    price: parsedFobMax,
+    
+    imageUrl: imageUrl,
+  };
+});
+
+
+
+console.log(cardsData);
+
+
+
 
 
 const BestDealsSection = ({ filteredData }) => {
@@ -111,8 +138,8 @@ useEffect(() => {
                     {card.model}
                   </Typography>
                   <Typography variant="body1">Year: {card.year}</Typography>
-                  <Typography variant="body1">FOB: ${card.fob}</Typography>
-                  <Typography variant="body1">Price: ${card.price}</Typography>
+                  <Typography variant="body1">FOB: ${card.fob.toLocaleString()}</Typography>
+                  <Typography variant="body1">Price: ${card.price.toLocaleString()}</Typography>
                 </CardContent>
               </Card>
             </div>
@@ -140,5 +167,5 @@ useEffect(() => {
 };
 
 
-export {cardData ,BestDealsSection}
+export {cardsData ,BestDealsSection}
 

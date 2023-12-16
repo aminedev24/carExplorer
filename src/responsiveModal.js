@@ -1,15 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { FaSearch, FaFilter, FaArrowLeft ,FaAngleDown} from 'react-icons/fa';
 import styles from './responsiveModal.module.css';
-import  {BestDealsSection,cardData} from './deals';
-import { Button, Container, Select, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
+import  {BestDealsSection,cardsData} from './deals';
+import { Button,Checkbox,FormControlLabel, Container, Select, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
 
 
 const markers = [
   { name: "Toyota", value: "toyota", image: '/img/markers/toyota.jfif' },
   { name: "Nissan", value: "nissan", image: 'img/markers/nissan.jfif' },
   { name: "Mitsubishi", value: "honda", image: 'img/markers/Mitsubishi.jfif' },
-  { name: "land cruiser", value: "land cruiser", image: 'img/markers/Mitsubishi.jfif' }
+  { name: "land cruiser", value: "land cruiser", image: 'img/markers/Mitsubishi.jfif' },
+  { name: "mercedes", value: "mercedes", image: '' }
   // Add more markers as needed
 ];
 
@@ -22,49 +23,71 @@ const ResponsiveModal = ({ showModal, onClose }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [priceRange, setPriceRange] = useState(15000);
   const [showPriceSection, setShowPriceSection] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [showMarkers, setShowMarkers] = useState(true);
 
   const handleTogglePriceSection = () => {
   setShowPriceSection(!showPriceSection);
 };
-const [filteredData, setFilteredData] = useState(cardData)
+
+const handleToggleMarkers = () => {
+    setShowMarkers(!showMarkers);
+  };
+
+
+
+  const handleCheckboxChange = () => {
+    // Handle checkbox change here
+  };
+
+const [filteredData, setFilteredData] = useState(cardsData)
 const [filters, setFilters] = useState({
-    marker: '',
-    priceFrom: '',
-    priceTo: '',
-  });
+  marker: '',
+  yearFrom: '',
+  yearTo: '',
+  priceFrom: '',
+  priceTo: '',
+});
+
 
 const applyFilters = () => {
   // Filter the data based on selected filters
   console.log('Selected Marker:', filters.marker);
-  const filteredData = cardData.filter((card) => {
+  const formattedMarker = filters.marker.toLowerCase();
+
+  const filteredData = cardsData.filter((card) => {
     // Implement your filter conditions here
-    const markerFilter = !filters.marker || card.model.toLowerCase().includes(filters.marker.toLowerCase());
+    console.log(`Brand: ${card.brand.toLowerCase()}, filters marker: ${formattedMarker}`);
+    const markerFilter = !formattedMarker || card.brand.toLowerCase().includes(formattedMarker);
   
     const yearFromFilter = !filters.yearFrom || card.year >= parseInt(filters.yearFrom);
     
     const yearToFilter = !filters.yearTo || card.year <= parseInt(filters.yearTo);
 
-    const priceFromFilter = !filters.priceFrom || card.fob >= parseInt(filters.priceFrom);
+    // Convert filters.priceFrom and filters.priceTo to numbers
+    const priceFrom = parseFloat(filters.priceFrom);
+    const priceTo = parseFloat(filters.priceTo);
 
-    const priceToFilter = !filters.priceTo || card.fob <= parseInt(filters.priceTo);
+    console.log(`Price from: ${priceFrom}, Price to: ${priceTo}, Card FOB: ${card.fob}`);
+    const priceFromFilter = !filters.priceFrom || card.fob >= priceFrom;
 
+    const priceToFilter = !filters.priceTo || card.fob <= priceTo;
+
+    console.log(`PriceFromFilter: ${priceFromFilter}, PriceToFilter: ${priceToFilter}`);
+    
     return markerFilter && yearFromFilter && yearToFilter && priceFromFilter && priceToFilter;
   });
 
   // Pass the filtered data back to the BestDealsSection component
   // You can use a callback passed as a prop for this purpose
   setFilteredData(filteredData);
-
-  // Close the modal
-  //onClose();
 };
 
 
 
- 
-
 const handlePriceChange = (e) => {
   setPriceRange(e.target.value);
+  applyFilters()
 };
 
 
@@ -74,23 +97,44 @@ const handlePriceChange = (e) => {
   };
 
   const handleResetFilters = () => {
-    // Implement logic to reset filters
-    console.log('Resetting filters...');
-  };
+  // Reset state variables related to filters
+  setSearchInput('');
+  setSelectedMarker('');
+  setPriceRange('');
+  setFilters({
+    marker: '',
+    yearFrom: '',
+    yearTo: '',
+    priceFrom: '',
+    priceTo: '',
+  });
+
+  // Apply filters after resetting
+  applyFilters();
+};
+
 
   const handleToggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const handleMarkerChange = (e) => {
-  console.log(e.target)
-  setSelectedMarker(e.target.value);
+  const handleMarkerChange = (event,value) => {
+  const selectedMarkerValue = event.target.value || value;
+
+  setSelectedMarker(selectedMarkerValue);
 
   setFilters((prevFilters) => ({
     ...prevFilters,
-    marker: e.target.value,
+    marker: selectedMarkerValue,
   }));
+  applyFilters()
 };
+
+  useEffect(() => {
+    // Apply filters when any filter changes
+    applyFilters();
+  }, [filters]); 
+
 
 
   useEffect(() => {
@@ -141,7 +185,7 @@ const handlePriceChange = (e) => {
             class="fb-page"
             data-href="https://web.facebook.com/profile.php?id=100087193303945"
             data-tabs="timeline"
-            data-width="500"
+            data-width="700"
             data-height=""
             data-small-header="false"
             data-adapt-container-width="true"
@@ -297,12 +341,35 @@ const handlePriceChange = (e) => {
                     </div>
 
 
-
-                    <div className={styles.searchButton}>
+                  <div className={styles.searchButton}>
                       <FaSearch className={styles.searchIcon} />
                       <Button variant="contained" onClick={applyFilters} className={styles.searchButton}>Search</Button>
                     </div>
                   </div>
+
+                  <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+        <h5 style={{ marginRight: '10px' }}>Markers:</h5>
+        <Button onClick={handleToggleMarkers} endIcon={<FaAngleDown />}>
+          {selectedMarker || ''}
+        </Button>
+      </div>
+
+      {showMarkers && (
+        <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+          {markers.map((marker) => (
+            <FormControlLabel
+              key={marker.value}
+              control={<Checkbox checked={selectedMarker === marker.value} />}
+              label={marker.name}
+              onChange={() => handleMarkerChange(marker.value)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Rest of your component */}
+    </div>
                
                  
                 </>

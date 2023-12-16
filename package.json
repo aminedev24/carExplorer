@@ -1,5 +1,6 @@
 {
-  "homepage": "https://aminedev24.github.io/carExplorer",
+  "homepage": "./",
+ 
   "name": "carexplorer",
   "version": "0.1.0",
   "private": true,
