@@ -3,14 +3,14 @@ import { FaSearch, FaFilter, FaArrowLeft ,FaAngleDown} from 'react-icons/fa';
 import styles from './responsiveModal.module.css';
 import  {BestDealsSection,cardsData} from './deals';
 import { Button,Checkbox,FormControlLabel, Container, Select, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
+import InputSlider from 'react-input-slider';
 
 
 const markers = [
   { name: "Toyota", value: "toyota", image: '/img/markers/toyota.jfif' },
   { name: "Nissan", value: "nissan", image: 'img/markers/nissan.jfif' },
-  { name: "Mitsubishi", value: "honda", image: 'img/markers/Mitsubishi.jfif' },
-  { name: "land cruiser", value: "land cruiser", image: 'img/markers/Mitsubishi.jfif' },
-  { name: "mercedes", value: "mercedes", image: '' }
+  { name: "Mitsubishi", value: "honda", image: 'img/markers/mitsubitchi.jfif' },
+  { name: "mercedes", value: "mercedes", image: 'img/markers/mercedes.jpg' }
   // Add more markers as needed
 ];
 
@@ -21,11 +21,11 @@ const ResponsiveModal = ({ showModal, onClose }) => {
   const [selectedMarker, setSelectedMarker] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(window.innerWidth > 900); // Set initial state based on screen width
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [priceRange, setPriceRange] = useState(15000);
+  const [priceRange, setPriceRange] = useState({ from: '', to: '' });
   const [showPriceSection, setShowPriceSection] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [showMarkers, setShowMarkers] = useState(true);
-
+  
   const handleTogglePriceSection = () => {
   setShowPriceSection(!showPriceSection);
 };
@@ -56,10 +56,10 @@ const applyFilters = () => {
 
   // Check if filters.marker is a string before converting to lowercase
   const formattedMarker = typeof filters.marker === 'string' ? filters.marker.toLowerCase() : '';
-
+  
   const filteredData = cardsData.filter((card) => {
     // Implement your filter conditions here
-    //console.log(`Brand: ${card.brand.toLowerCase()}, filters marker: ${formattedMarker}`);
+    console.log(`Brand: ${card.brand.toLowerCase()}, filters marker: ${formattedMarker}`);
     const markerFilter = !formattedMarker || card.brand.toLowerCase().includes(formattedMarker);
 
     const yearFromFilter = !filters.yearFrom || card.year >= parseInt(filters.yearFrom);
@@ -75,22 +75,38 @@ const applyFilters = () => {
 
     const priceToFilter = !filters.priceTo || card.fob <= priceTo;
 
+    // Price range filter
+    const priceRangeFilter =
+      card.fob >= priceRange.from && card.fob <= priceRange.to;
+
+    console.log(priceRangeFilter)
     //console.log(`PriceFromFilter: ${priceFromFilter}, PriceToFilter: ${priceToFilter}`);
 
-    return markerFilter && yearFromFilter && yearToFilter && priceFromFilter && priceToFilter;
+    return markerFilter && yearFromFilter && yearToFilter && priceFromFilter;
   });
 
   // Pass the filtered data back to the BestDealsSection component
   // You can use a callback passed as a prop for this purpose
+  console.log('Selected Marker:', filters.marker);
+  console.log('Price Range:', priceRange);
+  console.log('Price From:', filters.priceFrom);
+  console.log('Price To:', filters.priceTo);
   setFilteredData(filteredData);
 };
 
 
 
 const handlePriceChange = (e) => {
-  setPriceRange(e.target.value);
-  applyFilters()
+  const newValue = parseInt(e.target.value);
+  const { from, to } = priceRange;
+
+  // Determine which end of the range is being adjusted
+  const isFrom = Math.abs(newValue - from) < Math.abs(newValue - to);
+
+  // Update the state based on which end is being adjusted
+  setPriceRange(isFrom ? { from: newValue, to } : { from, to: newValue });
 };
+
 
 
 
@@ -121,8 +137,11 @@ const handlePriceChange = (e) => {
   };
 
 const handleMarkerChange = (event, value) => {
-  // Check if the event is coming from a Checkbox
-  if (event && event.target && event.target.type === 'checkbox') {
+  console.log('Event:', event);
+  console.log('Value:', value);
+
+  // Check if the value is defined (coming from the div click)
+  if (value !== undefined) {
     const selectedMarkerValue = value;
     setSelectedMarker(selectedMarkerValue);
 
@@ -133,6 +152,8 @@ const handleMarkerChange = (event, value) => {
   } else {
     // Handle the case when the event is coming from the Select component
     const selectedMarkerValue = event.target.value;
+
+    console.log('Select value:', selectedMarkerValue);
     setSelectedMarker(selectedMarkerValue);
 
     setFilters((prevFilters) => ({
@@ -140,7 +161,10 @@ const handleMarkerChange = (event, value) => {
       marker: selectedMarkerValue,
     }));
   }
+
+
 };
+
 
 
 
@@ -180,7 +204,7 @@ const handleMarkerChange = (event, value) => {
             value={searchInput}
             onChange={handleSearchChange}
           />
-        </div>
+        </div> 
         <div className={styles.filterContainer} onClick={handleToggleModal}>
           <FaFilter className={styles.filterIcon} />
           Filters
@@ -235,7 +259,7 @@ const handleMarkerChange = (event, value) => {
                         labelId="marker-select-label"
                         id="marker-select"
                         value={selectedMarker}
-                        onChange={handleMarkerChange}
+                        onChange={(e) => handleMarkerChange(e)}
                         label="Select a Marker"
                       >
                       <MenuItem value="" disabled>
@@ -392,7 +416,7 @@ const handleMarkerChange = (event, value) => {
                 {/* Scrollable container with marker buttons on smaller screens */}
                 <div className={styles.markers}>
                 {markers.map((marker) => (
-                  <div onClick={handleMarkerChange} key={marker.value} className={styles.markerButton}>
+                  <div onClick={(event) => handleMarkerChange(event, marker.value)} key={marker.value} className={styles.markerButton}>
                     <img src={marker.image} alt={"maker-image"} className={styles.markerImage} />
                     <span>{marker.name}</span>
                   </div>
@@ -416,25 +440,37 @@ const handleMarkerChange = (event, value) => {
  
                 </div>
                 {/* Price Range Section */}
-                  {showPriceSection && (
-                    <div className={styles.rangeSliderContainer}>
-                      {/* Range Slider */}
-                      <input
-                        type="range"
-                        min={750}
-                        max={30000}
-                        step={50}
-                        value={priceRange}
-                        onChange={handlePriceChange}
-                        className={styles.rangeSlider}
-                      />
+                 
+                {showPriceSection && (
+                  <div className={styles.rangeSliderContainer}>
+                    {/* Range Slider for "from" */}
+                    <input
+                      type="range"
+                      min={750}
+                      max={30000}
+                      step={50}
+                      value={priceRange.from}
+                      onChange={(e) => handlePriceChange(e, 'from')}
+                      className={styles.rangeSlider}
+                    />
 
-                      {/* Display the selected value */}
-                      <div className={styles.rangeValue}>
-                        ${priceRange}
-                      </div>
+                    {/* Range Slider for "to" */}
+                    <input
+                      type="range"
+                      min={750}
+                      max={30000}
+                      step={50}
+                      value={priceRange.to}
+                      onChange={(e) => handlePriceChange(e, 'to')}
+                      className={`${styles.rangeSlider} ${styles.absoluteSlider}`}
+                    />
+
+                    {/* Display the selected range */}
+                    <div className={styles.rangeValue}>
+                      ${priceRange.from} - ${priceRange.to}
                     </div>
-                  )}
+                  </div>
+                )}
                
               </>
               )}
