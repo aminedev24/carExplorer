@@ -5,23 +5,28 @@ import { Container, Typography, Grid, Paper } from '@mui/material';
 
 const stepsData = [
   {
+    title: 'choose your vehicle',
     imageSrc: 'img/how-to-buy/step-1.png',
     description: "Find the best Japanese vehicle for you using our search function or from our Once you find the used car you like, check its details and photos. Use the quote function to immediately verify the total cost from Japan to your Country. (Online quotation not available for some Country / vehicle combinations).",
   },
   {
+    title: 'Get a free invoice and order the vehicle.',
     imageSrc: 'img/how-to-buy/step-2.png',
     description: "Request an invoice for any used car from our stock: it is free and easy. Input your details and we will email you an invoice within one hour time. If you decide to purchase, contact us so that we can reserve the vehicle for you before someone else buys it.",
     scaleDown: true,
   },
   {
+    title: 'Complete the payment.',
     imageSrc: 'img/how-to-buy/step-3.png',
     description: "Complete the payment by Bank Telegraphic Transfer, from any bank. You can pay also using the PayPal system. After you have completed the payment please send us a copy of Telegraphic Transfer copy as proof of payment. When the payment is here, we will email you a confirmation.",
   },
   {
+    title: 'Your vehicle is shipped.',
     imageSrc: 'img/how-to-buy/step-4.png',
     description: "After receiving the full payment we will immediately begin the export arrangements for the first vessel available. You can follow the status of your shipment by accessing your account page, at any time. We will send the documents to you or your agent by DHL courier a few days after the vessel leaves Japan.",
   },
   {
+    title: 'Collect your vehicle.',
     imageSrc: 'img/how-to-buy/step-5.png',
     description: "Once you receive the documents, you can begin arranging collection and registration in your country of the vehicle. A clearing agent can help you complete the procedure and give you an indication of the fee and taxes to be paid. Complete the procedures and drive your vehicle away!",
   },
@@ -73,7 +78,7 @@ const CarBuyingSteps = () => {
                 />
               </div>
               <div className="text-container ml-md-3">
-                <Typography variant="h4">Step {index + 1}: Lorem Ipsum</Typography>
+                <Typography variant="h4">Step {index + 1}: {step.title}</Typography>
                 <Typography variant="body1" className="lead custom-text">
                   {step.description}
                 </Typography>

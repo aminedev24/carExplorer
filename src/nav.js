@@ -31,8 +31,8 @@ const NavigationMenu = () => {
                 &times;
               </div>
             </div>
-            <Link to="/">Shop</Link>
-            <Link to="/how-to-buy">How to buy</Link>
+            <Link onClick={toggleMenu} to="/">Shop</Link>
+            <Link onClick={toggleMenu} to="/how-to-buy">How to buy</Link>
             <div className={styles.navAbout}>
               About Us
               {showAboutDropdown ? (
@@ -47,8 +47,11 @@ const NavigationMenu = () => {
               )}
             </div>
             <Link to="/shipping">Shipping</Link>
-            <button className={styles.navBtn}>Sign In</button>
-            <button className={styles.navBtn}>Sign Up</button>
+            <div className='nav-btns'>
+                <button className={styles.navBtn}>Sign In</button>
+                <button className={styles.navBtn}>Sign Up</button>
+            </div>
+            
           </nav>
         </div>
       </Router>

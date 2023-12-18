@@ -82,7 +82,7 @@
 
 @media screen and (max-width:900px) {
     .dealsAndcontainer {
-        width: 60% !important;
+        width: 100% !important;
     }
     
 }

@@ -154,9 +154,15 @@
 
     .nav a,
     .navAbout {
-        padding:27px 03px;
+        padding:20px 03px;
         font-weight: bold;
         color: darkblue !important;
+    }
+
+    .nav-btns {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     .show {
@@ -172,7 +178,7 @@
     }
 
     .navBtn {
-        width: 100%;
+        width: 50%;
         /* Make the button full width */
         margin-top: 10px;
         /* Add some space between buttons */

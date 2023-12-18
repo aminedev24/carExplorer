@@ -21,7 +21,7 @@ const ResponsiveModal = ({ showModal, onClose }) => {
   const [selectedMarker, setSelectedMarker] = useState('');
   const [isModalOpen, setIsModalOpen] = useState(window.innerWidth > 900); // Set initial state based on screen width
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [priceRange, setPriceRange] = useState({ from: '', to: '' });
+  const [priceRange, setPriceRange] = useState({ from: '750', to: '3000' });
   const [showPriceSection, setShowPriceSection] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [showMarkers, setShowMarkers] = useState(true);
@@ -82,7 +82,7 @@ const applyFilters = () => {
     console.log(priceRangeFilter)
     //console.log(`PriceFromFilter: ${priceFromFilter}, PriceToFilter: ${priceToFilter}`);
 
-    return markerFilter && yearFromFilter && yearToFilter && priceFromFilter;
+    return markerFilter && yearFromFilter && yearToFilter && priceFromFilter && priceToFilter;
   });
 
   // Pass the filtered data back to the BestDealsSection component
