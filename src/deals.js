@@ -69,8 +69,8 @@ const rows = csvData.trim().split('\n').slice(1); // Skip header row
 const cardsData = rows.map((row, id) => {
   const [brand, model, year, fobMin, fobMax] = row.split(',');
 
-  const formattedModel = model.replace(/\s+/g, '');
-  console.log(formattedModel)
+  const formattedModel = model.replace(/\s+/g, '').toLocaleLowerCase();
+  console.log(`formattedModel ${formattedModel}`);
   const imageUrl = `img/deals/${formattedModel}.jpg`;
 
   // Convert fobMin and fobMax to numbers

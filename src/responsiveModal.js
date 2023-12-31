@@ -230,7 +230,7 @@ useEffect(() => {
       <BestDealsSection filteredData={filteredData} />
     </div>
 
-       {windowWidth >= 1000 &&
+       {windowWidth >= 1001 &&
         <div className={styles.fbRoot} id="fb-root">
           <div
             className="fb-page"
