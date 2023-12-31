@@ -15,6 +15,7 @@
     align-items: center;
 }
 
+
 .left-section {
     flex: 1;
     /* Takes as much space as possible */
@@ -22,9 +23,22 @@
 
 .center-section {
     flex: 0 0 auto;
+    
     /* Does not grow or shrink, and takes its content size */
 }
 
+
+
+@media screen and (min-width: 1400px) {
+    .center-section {
+        position: relative;
+        left: 16% !important;
+    }
+
+    .topBarHeader {
+        top: 37px !important;
+    }
+}
 .right-section {
     flex: 1;
     /* Takes as much space as possible */
@@ -65,13 +79,16 @@
 }
 
 .top-bar-btn {
-    font-size: 20px;
+    font-size: 18px;
     padding: 8px 15px;
     background-color: #3498db;
     color: #fff;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+    margin-left: 10px;
+    /* Add margin for separation */
 }
 
 .top-bar-btn:hover {

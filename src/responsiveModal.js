@@ -16,6 +16,26 @@ const markers = [
 
 // ... (other imports and code)
 
+export const ModalHeader = ({ searchInput, handleSearchChange, handleToggleModal }) => (
+  <div className={`${styles.modalHeader} topBarHeader`}>
+    <div className={`${styles.searchContainer} ${'d-flex align-items-center'}`}>
+      <FaSearch className={styles.searchIcon} />
+      <input
+        className={styles.searchInput}
+        type="text"
+        placeholder="Search..."
+        value={searchInput}
+        onChange={handleSearchChange}
+      />
+    </div>
+    <div className={styles.filterContainer} onClick={handleToggleModal}>
+      <FaFilter className={styles.filterIcon} />
+      Filters
+    </div>
+  </div>
+);
+
+
 const ResponsiveModal = ({ showModal, onClose }) => {
   const [searchInput, setSearchInput] = useState('');
   const [selectedMarker, setSelectedMarker] = useState('');
@@ -189,28 +209,18 @@ useEffect(() => {
     };
   }, []);
 
+ 
+
   return (
     <>
     <div className={styles.dealsAndcontainer}>
 
-      <div className={styles.modalHeader}>
-        <div className={`${styles.searchContainer} ${'d-flex align-items-center'}`}>
-          <FaSearch className={styles.searchIcon} />
-          <input
-            className={styles.searchInput}
-            type="text"
-            placeholder="Search..."
-            value={searchInput}
-            onChange={handleSearchChange}
-          />
-        </div> 
-        <div className={styles.filterContainer} onClick={handleToggleModal}>
-          <FaFilter className={styles.filterIcon} />
-          Filters
-        </div>
-        
-       
-      </div>
+      {windowWidth < 1400 && 
+      <ModalHeader
+          searchInput={searchInput}
+          handleSearchChange={handleSearchChange}
+          handleToggleModal={handleToggleModal}
+      /> }
       
       <div className={`container ${styles.bannerContainer}`}>
        <img src='img/banner.png' className={`img-fluid ${styles.bannerImage}`} alt="Banner" />
@@ -278,7 +288,7 @@ useEffect(() => {
                     <div className={styles.priceRange}>
                       <Typography variant="h5" style={{ textAlign: 'center' }}>Price</Typography>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <FormControl variant="outlined">
+                        <FormControl variant="outlined" >
                           <InputLabel id="price-from-label">From</InputLabel>
                           <Select
                             labelId="price-from-label"
@@ -286,16 +296,16 @@ useEffect(() => {
                             value={filters.priceFrom}
                             onChange={(e) => setFilters({ ...filters, priceFrom: e.target.value })}
                             label="From"
-                            style={{ minWidth: '100px', position: 'relative' }}
+                            className={styles.formControl}
                             MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} style={{ maxHeight: '100px', overflowY: 'scroll',position:'absolute' }}>
+                              <Menu {...props} >
                                 {children}
                               </Menu>
                             )}
                           >
                             <MenuItem value="">From</MenuItem>
                             {Array.from({ length: 292 }, (_, index) => 750 + index * 50).map((value) => (
-                              <MenuItem key={value} value={value}>
+                              <MenuItem key={value} value={value} >
                                 ${value}
                               </MenuItem>
                             ))}
@@ -310,7 +320,7 @@ useEffect(() => {
                             value={filters.priceTo}
                             onChange={(e) => setFilters({ ...filters, priceTo: e.target.value })}
                             label="To"
-                            style={{ minWidth: '100px' }}
+                            className={styles.formControl}
                             MenuComponent={({ children, ...props }) => (
                               <Menu {...props} style={{ maxHeight: '200px', overflowY: 'scroll' }}>
                                 {children}
@@ -339,7 +349,7 @@ useEffect(() => {
                             value={filters.yearFrom}
                             onChange={(e) => setFilters({ ...filters, yearFrom: e.target.value })}
                             label="From"
-                            style={{ minWidth: '100px' }}
+                            className={styles.formControl}
                             MenuComponent={({ children, ...props }) => (
                               <Menu {...props} style={{ maxHeight: '200px', overflowY: 'scroll' }}>
                                 {children}
@@ -363,9 +373,9 @@ useEffect(() => {
                             value={filters.yearTo}
                             onChange={(e) => setFilters({ ...filters, yearTo: e.target.value })}
                             label="To"
-                            style={{ minWidth: '100px' }}
+                            className={styles.formControl}
                             MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} style={{ maxHeight: '200px', overflowY: 'scroll' }}>
+                              <Menu {...props} style={{ height: '200px !important', overflowY: 'scroll' }}>
                                 {children}
                               </Menu>
                             )}
