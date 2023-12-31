@@ -27,7 +27,7 @@
 .fbRoot {
     position: absolute;
     right: 7%;
-    top: 50%;
+    top: 30%;
 }
 
 .dealsAndcontainer {
@@ -73,16 +73,21 @@
 /* Adjustments for larger screens */
 /* Updated styles for larger screens */
 
+.bannerContainer {
+    margin-top: 10%;
+}
+
+
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
     .dealsAndcontainer {
-        left: 25% !important;
+        left: 33% !important;
         width: 45%;
     }
 }
 
-@media screen and (max-width:900px) {
+@media screen and (min-width: 760px) and  (max-width:1000px) {
     .dealsAndcontainer {
-        width: 100% !important;
+        width: 67% !important;
     }
     
 }
@@ -225,12 +230,12 @@ input {
 
 @media screen and (min-width: 900px) {
     .modal {
-        width: 25%;
+        width: 33%;
         position: relative;
     }
 
     .dealsAndcontainer {
-        left: 25%;
+        left: 33%;
     }
 
     .backIcon {
@@ -251,6 +256,11 @@ input {
         width: 25%;
     }
 
+    .inputContainer {
+        width: 70%;
+        margin: 0 auto;
+    }
+
     .contentHeader , .markersContainer,.inputsFlex input,.markerSelect, .searchButton {
         font-size: 21px;
     }
@@ -263,7 +273,8 @@ input {
         background-color: darkblue;
         color: #fff;
         padding: 20px;
-        border-radius: 40px;
+        border-radius: 10px;
+        text-align: center;
     }
 
    .markerSelect {

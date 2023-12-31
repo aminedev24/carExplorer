@@ -52,15 +52,15 @@ const cardData = [
 
 const csvData = `
 Brand,Model,Year,FOB_Min,FOB_Max
-TOYOTA,LAND CRUISER,2023,108600,113888
+TOYOTA,land cruiser,2023,108600,113888
 TOYOTA,toyota DYNA,2003,6280,6800
 MITSUBISHI,FUSO FIGHTER MIGNON,1999,14000,15500
 TOYOTA,toyota NOAH,2008,1500,1960
 TOYOTA,LAND CRUISER PRADO,2018,26000,26675
 TOYOTA,LAND CRUISER PRADO14,2014,17900,18800
-TOYOTA,toyota CARINA,2001,2210,2590
-MERCEDES BENZ,mercedes E-CLASS,2017,14800,15600
-MERCEDES BENZ,mercedes G-CLASS,2003,17500,18930
+TOYOTA,toyota Carina,2001,2210,2590
+MERCEDES BENZ,mercedes E-class,2017,14800,15600
+MERCEDES BENZ,mercedes G-class,2003,17500,18930
 MITSUBISHI,FUSO FIGHTER,2003,8600,8800
 `;
 
@@ -69,7 +69,8 @@ const rows = csvData.trim().split('\n').slice(1); // Skip header row
 const cardsData = rows.map((row, id) => {
   const [brand, model, year, fobMin, fobMax] = row.split(',');
 
-  const formattedModel = model.replace(/\s+/g, '').toLowerCase();
+  const formattedModel = model.replace(/\s+/g, '');
+  console.log(formattedModel)
   const imageUrl = `img/deals/${formattedModel}.jpg`;
 
   // Convert fobMin and fobMax to numbers
@@ -94,14 +95,6 @@ const cardsData = rows.map((row, id) => {
   };
 });
 
-
-
-console.log(cardsData);
-
-
-
-
-
 const BestDealsSection = ({ filteredData }) => {
   //console.log(filteredData);
   const [dataToDisplay, setDataToDisplay] = useState(filteredData);
@@ -115,6 +108,7 @@ useEffect(() => {
 
   return (
     <div className="container mt-5">
+      
       <div className="d-flex justify-content-between align-items-center">
         <Typography variant="h4">Best Deals</Typography>
         <Button variant="contained" color="primary">

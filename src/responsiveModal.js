@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FaSearch, FaFilter, FaArrowLeft ,FaAngleDown} from 'react-icons/fa';
 import styles from './responsiveModal.module.css';
 import  {BestDealsSection,cardsData} from './deals';
-import { Button,Checkbox,FormControlLabel, Container, Select, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
+import { Paper,Button,Checkbox,FormControlLabel, Container, Select, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
 import InputSlider from 'react-input-slider';
 
 
@@ -25,6 +25,8 @@ const ResponsiveModal = ({ showModal, onClose }) => {
   const [showPriceSection, setShowPriceSection] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [showMarkers, setShowMarkers] = useState(true);
+
+
   
   const handleTogglePriceSection = () => {
   setShowPriceSection(!showPriceSection);
@@ -165,11 +167,7 @@ const handleMarkerChange = (event, value) => {
 
 };
 
-
-
-
-
-  useEffect(() => {
+useEffect(() => {
     // Apply filters when any filter changes
     applyFilters();
   }, [filters]); 
@@ -194,6 +192,7 @@ const handleMarkerChange = (event, value) => {
   return (
     <>
     <div className={styles.dealsAndcontainer}>
+
       <div className={styles.modalHeader}>
         <div className={`${styles.searchContainer} ${'d-flex align-items-center'}`}>
           <FaSearch className={styles.searchIcon} />
@@ -209,10 +208,13 @@ const handleMarkerChange = (event, value) => {
           <FaFilter className={styles.filterIcon} />
           Filters
         </div>
-      
+        
        
       </div>
       
+      <div className={`container ${styles.bannerContainer}`}>
+       <img src='img/banner.png' className={`img-fluid ${styles.bannerImage}`} alt="Banner" />
+      </div>
 
        
       <BestDealsSection filteredData={filteredData} />
@@ -221,7 +223,7 @@ const handleMarkerChange = (event, value) => {
        {windowWidth >= 1000 &&
         <div className={styles.fbRoot} id="fb-root">
           <div
-            class="fb-page"
+            className="fb-page"
             data-href="https://web.facebook.com/profile.php?id=100087193303945"
             data-tabs="timeline"
             data-width="700"
@@ -284,9 +286,9 @@ const handleMarkerChange = (event, value) => {
                             value={filters.priceFrom}
                             onChange={(e) => setFilters({ ...filters, priceFrom: e.target.value })}
                             label="From"
-                            style={{ minWidth: '100px' }}
+                            style={{ minWidth: '100px', position: 'relative' }}
                             MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} style={{ maxHeight: '200px', overflowY: 'scroll' }}>
+                              <Menu {...props} style={{ maxHeight: '100px', overflowY: 'scroll',position:'absolute' }}>
                                 {children}
                               </Menu>
                             )}
@@ -385,9 +387,14 @@ const handleMarkerChange = (event, value) => {
                       <Button variant="contained" onClick={applyFilters} className={styles.searchButton}>Search</Button>
                     </div>
                   </div>
-
-                  <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                  <div style={{ display: 'flex',flexDirection: 'column' }}>
+                    <div style={{ 
+                      display: 'flex', 
+                      alignItems: 'center',
+                      justifyContent: 'space-between', 
+                      marginBottom: '10px',
+                      padding: '20px'
+                       }}>
                       <h5 style={{ marginRight: '10px' }}>Markers:</h5>
                       <Button onClick={handleToggleMarkers} endIcon={<FaAngleDown />}>
                         {selectedMarker || ''}
@@ -395,7 +402,7 @@ const handleMarkerChange = (event, value) => {
                     </div>
 
                     {showMarkers && (
-                      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' }}>
+                      <div style={{ display: 'flex', flexDirection: 'column', marginTop: '10px' ,padding: '0 20px'}}>
                         {markers.map((marker) => (
                           <FormControlLabel
                             key={marker.value}
@@ -407,9 +414,8 @@ const handleMarkerChange = (event, value) => {
                       </div>
                     )}
                   </div>
-               
-                 
-                </>
+              </>
+              
               ) : (
               <>
                 
