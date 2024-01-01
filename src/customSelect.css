@@ -1,0 +1,83 @@
+/* CustomSelect.css */
+
+.custom-select-container {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    /* Adjust width as needed */
+}
+
+.custom-select {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    user-select: none;
+    width: 45%;
+    /* Adjust width as needed */
+}
+
+.custom-select.open {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.arrow {
+    margin-top: 5px;
+    transition: transform 0.3s ease;
+}
+
+.year-options-container {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-top: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    overflow: hidden;
+    max-height: 150px;
+    overflow-y: auto;
+    z-index: 1000;
+    /* Adjust z-index as needed */
+}
+
+.year-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.year-option:hover {
+    background-color: #f0f0f0;
+}
+
+.custom-select.open .arrow {
+    transform: rotateX(180deg);
+}
+
+.year-label {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 12px;
+    color: #777;
+    transition: top 0.3s ease, font-size 0.3s ease;
+}
+
+.custom-select.open .year-label {
+    top: -15px;
+    font-size: 12px;
+}
+
+.year-input {
+    width: 100%;
+    text-align: center;
+    margin-top: 5px;
+}

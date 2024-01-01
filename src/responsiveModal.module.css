@@ -1,7 +1,7 @@
 /* ResponsiveModal.css */
 .modal {
     position: fixed;
-    top: 14%;
+    top: 16%;
     left: 0;
     width: 100%;
     height: 100%;
@@ -26,13 +26,13 @@
 
 .fbRoot {
     position: absolute;
-    right: 7%;
-    top: 30%;
+    left: 100%;
+    top: 6.7%;
 }
 
 .dealsAndcontainer {
     position: absolute;
-    width: 45%;
+    width: 53%;
 }
 
 .modalHeader {
@@ -80,8 +80,8 @@
 
 @media screen and (min-width: 1000px) and (max-width: 1400px) {
     .dealsAndcontainer {
-        left: 33% !important;
-        width: 45%;
+        left: 26% !important;
+        width: 53%;
     }
 }
 
@@ -263,14 +263,14 @@ input {
     width: 40px;
 }
 
-@media screen and (min-width: 900px) {
+@media screen and (min-width: 1001px) {
     .modal {
-        width: 33%;
+        width: 25%;
         position: relative;
     }
 
     .dealsAndcontainer {
-        left: 33%;
+        left: 28%;
     }
 
     .backIcon {
@@ -289,7 +289,7 @@ input {
 
 @media screen and (min-width: 1500px) {
     .modal {
-        width: 25%;
+        width: 27%;
     }
 
     .inputContainer {
@@ -338,14 +338,16 @@ input {
 .searchAccuracy,
 .modelSelection,
 .yearRange,
-.priceRange,
-.searchButton {
+.priceRange {
     width: 100%;
     margin-bottom: 20px;
 }
 
+.searchButton {
+    width: 60%;
+}
 .markerSelect {
-    width: 50%;
+    width: 70% !important;
     padding: 8px;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -369,6 +371,9 @@ input {
     padding: 20px;
     /* Header background color */
     color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .inputsFlex input {
@@ -493,6 +498,7 @@ button:hover {
     display: flex;
     flex-direction: row;
     cursor: pointer;
+    overflow-y: scroll;
 }
 
 .dropdownAndRangeContainer {

@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { FaSearch, FaFilter, FaArrowLeft ,FaAngleDown} from 'react-icons/fa';
 import styles from './responsiveModal.module.css';
 import  {BestDealsSection,cardsData} from './deals';
-import { Paper,Button,Checkbox,FormControlLabel, Container, Select, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
+import Select from 'react-select';
+import {Select as MuiSelect, Paper,Button,Checkbox,FormControlLabel, Container, MenuItem, InputLabel, FormControl, Slider, Typography,Card ,CardContent,Menu} from '@mui/material';
 import InputSlider from 'react-input-slider';
+import CustomSelect from './customSelect'; // Adjust the path as needed
 
 
 const markers = [
@@ -211,6 +213,23 @@ useEffect(() => {
 
  
 
+    const priceFromOptions = Array.from({ length: 292 }, (_, index) => ({
+    value: 750 + index * 50,
+    label: `$${750 + index * 50}`,
+  }));
+
+  const priceToOptions = Array.from({ length: 292 }, (_, index) => ({
+    value: 750 + index * 500,
+    label: `$${750 + index * 500}`,
+  }));
+
+  const yearOptions = Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => ({
+    value: 1980 + index,
+    label: `${1980 + index}`,
+  }));
+
+  
+
   return (
     <>
     <div className={styles.dealsAndcontainer}>
@@ -227,27 +246,10 @@ useEffect(() => {
       </div>
 
        
-      <BestDealsSection filteredData={filteredData} />
+      <BestDealsSection filteredData={filteredData} windowWidth={windowWidth} />
     </div>
 
-       {windowWidth >= 1001 &&
-        <div className={styles.fbRoot} id="fb-root">
-          <div
-            className="fb-page"
-            data-href="https://web.facebook.com/profile.php?id=100087193303945"
-            data-tabs="timeline"
-            data-width="700"
-            data-height=""
-            data-small-header="false"
-            data-adapt-container-width="true"
-            data-hide-cover="false"
-            data-show-facepile="true"
-        >
-            <blockquote cite="https://web.facebook.com/profile.php?id=100087193303945" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/profile.php?id=100087193303945">Ichinomiya Motors</a></blockquote>
-        </div>
-        </div>
-          
-      }
+       
       {isModalOpen && (
         <Card className={styles.modal}>
           {/* Rest of your modal content */}
@@ -261,13 +263,13 @@ useEffect(() => {
             </div>
             
             <div className={styles.markersContainer}>
-              {windowWidth > 900 ? (
+              {windowWidth > 1001 ? (
                 <>
                   <Typography className={styles.markersHeader} variant="h5">Search with Accuracy</Typography>
                   <div className={styles.inputContainer}>
-                    <FormControl fullWidth variant="outlined">
+                    <FormControl className={styles.markerSelect} fullWidth variant="outlined">
                       <InputLabel id="marker-select-label">Select a Marker</InputLabel>
-                      <Select
+                      <MuiSelect
                         labelId="marker-select-label"
                         id="marker-select"
                         value={selectedMarker}
@@ -282,114 +284,64 @@ useEffect(() => {
                             {marker.name}
                           </MenuItem>
                         ))}
-                      </Select>
+                      </MuiSelect>
                     </FormControl>
 
                     <div className={styles.priceRange}>
-                      <Typography variant="h5" style={{ textAlign: 'center' }}>Price</Typography>
+                      <Typography variant="h5" style={{ textAlign: 'center' }}>
+                        Price
+                      </Typography>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <FormControl variant="outlined" >
-                          <InputLabel id="price-from-label">From</InputLabel>
-                          <Select
-                            labelId="price-from-label"
-                            id="price-from"
-                            value={filters.priceFrom}
-                            onChange={(e) => setFilters({ ...filters, priceFrom: e.target.value })}
-                            label="From"
-                            className={styles.formControl}
-                            MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} >
-                                {children}
-                              </Menu>
-                            )}
-                          >
-                            <MenuItem value="">From</MenuItem>
-                            {Array.from({ length: 292 }, (_, index) => 750 + index * 50).map((value) => (
-                              <MenuItem key={value} value={value} >
-                                ${value}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
+                        <Select
+                          options={priceFromOptions}
+                          value={{ value: filters.priceFrom, label: filters.priceFrom ? `$${filters.priceFrom}` : 'From' }}
+                          onChange={(selectedOption) => setFilters({ ...filters, priceFrom: selectedOption.value })}
+                        />
                         <span style={{ margin: '0 5px' }}>-</span>
-                        <FormControl variant="outlined">
-                          <InputLabel id="price-to-label">To</InputLabel>
-                          <Select
-                            labelId="price-to-label"
-                            id="price-to"
-                            value={filters.priceTo}
-                            onChange={(e) => setFilters({ ...filters, priceTo: e.target.value })}
-                            label="To"
-                            className={styles.formControl}
-                            MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} style={{ maxHeight: '200px', overflowY: 'scroll' }}>
-                                {children}
-                              </Menu>
-                            )}
-                          >
-                            <MenuItem value="">To</MenuItem>
-                            {Array.from({ length: 292 }, (_, index) => 750 + index * 500).map((value) => (
-                              <MenuItem key={value} value={value}>
-                                ${value}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
+                        <Select
+                          options={priceToOptions}
+                          value={{ value: filters.priceTo, label: filters.priceTo ? `$${filters.priceTo}` : 'To' }}
+                          onChange={(selectedOption) => setFilters({ ...filters, priceTo: selectedOption.value })}
+                          menuPlacement="bottom"
+                          menuPortalTarget={document.body}
+                          styles={{
+                            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                          }}
+                        />
                       </div>
                     </div>
 
                     <div className={styles.yearRange}>
-                      <Typography variant="h5" style={{ textAlign: 'center' }}>Year</Typography>
+                      <Typography variant="h5" style={{ textAlign: 'center' }}>
+                        Year
+                      </Typography>
                       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <FormControl variant="outlined">
-                          <InputLabel id="year-from-label">From</InputLabel>
-                          <Select
-                            labelId="year-from-label"
-                            id="year-from"
-                            value={filters.yearFrom}
-                            onChange={(e) => setFilters({ ...filters, yearFrom: e.target.value })}
-                            label="From"
-                            className={styles.formControl}
-                            MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} style={{ maxHeight: '200px', overflowY: 'scroll' }}>
-                                {children}
-                              </Menu>
-                            )}
-                          >
-                            <MenuItem value="">From</MenuItem>
-                            {Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => 1980 + index).map((year) => (
-                              <MenuItem key={year} value={year}>
-                                {year}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
+                        <Select
+                          options={yearOptions}
+                          value={{ value: filters.yearFrom, label: filters.yearFrom ? `${filters.yearFrom}` : 'From' }}
+                          onChange={(selectedOption) => setFilters({ ...filters, yearFrom: selectedOption.value })}
+                          isSearchable={false}
+                          menuPlacement="bottom"
+                          menuPortalTarget={document.body}
+                          styles={{
+                            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                          }}
+                        />
                         <span style={{ margin: '0 5px' }}>-</span>
-                        <FormControl variant="outlined">
-                          <InputLabel id="year-to-label">To</InputLabel>
-                          <Select
-                            labelId="year-to-label"
-                            id="year-to"
-                            value={filters.yearTo}
-                            onChange={(e) => setFilters({ ...filters, yearTo: e.target.value })}
-                            label="To"
-                            className={styles.formControl}
-                            MenuComponent={({ children, ...props }) => (
-                              <Menu {...props} style={{ height: '200px !important', overflowY: 'scroll' }}>
-                                {children}
-                              </Menu>
-                            )}
-                          >
-                            <MenuItem value="">To</MenuItem>
-                            {Array.from({ length: new Date().getFullYear() - 1980 + 1 }, (_, index) => 1980 + index).map((year) => (
-                              <MenuItem key={year} value={year}>
-                                {year}
-                              </MenuItem>
-                            ))}
-                          </Select>
-                        </FormControl>
+                        <Select
+                          options={yearOptions}
+                          value={{ value: filters.yearTo, label: filters.yearTo ? `${filters.yearTo}` : 'To' }}
+                          onChange={(selectedOption) => setFilters({ ...filters, yearTo: selectedOption.value })}
+                          isSearchable={false}
+                          menuPlacement="bottom"
+                          menuPortalTarget={document.body}
+                          styles={{
+                            menuPortal: (base) => ({ ...base, zIndex: 9999 }),
+                          }}
+                        />
                       </div>
                     </div>
+
 
 
                   <div className={styles.searchButton}>

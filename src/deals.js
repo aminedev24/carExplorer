@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import styles from './responsiveModal.module.css';
 import { 
   Button, 
   Container, 
@@ -95,7 +96,7 @@ const cardsData = rows.map((row, id) => {
   };
 });
 
-const BestDealsSection = ({ filteredData }) => {
+const BestDealsSection = ({ filteredData,windowWidth }) => {
   //console.log(filteredData);
   const [dataToDisplay, setDataToDisplay] = useState(filteredData);
 
@@ -164,6 +165,25 @@ useEffect(() => {
             </div>
           )}
       </div>
+      
+      {windowWidth >= 1001 &&
+        <div className={styles.fbRoot} id="fb-root">
+          <div
+            className="fb-page"
+            data-href="https://web.facebook.com/profile.php?id=100087193303945"
+            data-tabs="timeline"
+            data-width="700"
+            data-height=""
+            data-small-header="false"
+            data-adapt-container-width="true"
+            data-hide-cover="false"
+            data-show-facepile="true"
+        >
+            <blockquote cite="https://web.facebook.com/profile.php?id=100087193303945" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/profile.php?id=100087193303945">Ichinomiya Motors</a></blockquote>
+        </div>
+        </div>
+          
+      }
 
     </div>
   );
