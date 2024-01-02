@@ -10,6 +10,14 @@
     flex-direction: column;
 }
 
+.tabContent {
+    display: flex;
+    padding: 16px;
+    border: '1px solid #ccc';
+    border-radius: 8px;
+    background-color: '#f9f9f9';
+}
+
 .rangeSliderContainer {
     position: relative;
 }
@@ -101,10 +109,10 @@
     
 }
 
-@media screen and (max-width:1000) {
-    .carModal {
-        transform: translate(-37%,-50%);
-    }
+
+
+@media screen and (max-width:1000px) {
+   
     
 }
 @media screen and (min-width: 760px) and  (max-width:1000px) {

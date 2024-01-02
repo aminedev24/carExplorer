@@ -95,9 +95,14 @@
     background-color: #2980b9;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 800px) {
     .logo {
-        max-width: 55%;
+        max-width: 80%;
+    }
+
+    .center-section {
+        left: 20%;
+        position: relative;
     }
 
     .left-section,
@@ -109,10 +114,7 @@
         /* Space between left and right sections */
     }
 
-    .center-section {
-        align-self: flex-start;
-        /* Align center section to the far left */
-    }
+    
 
     .contact-info {
         text-align: left;

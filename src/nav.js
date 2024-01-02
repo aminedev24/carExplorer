@@ -33,7 +33,7 @@ const NavigationMenu = () => {
             </div>
             <Link onClick={toggleMenu} to="/">Shop</Link>
             <Link onClick={toggleMenu} to="/how-to-buy">How to buy</Link>
-            <div className={styles.navAbout}>
+            <div onClick={toggleAboutDropdown} className={styles.navAbout}>
               About Us
               {showAboutDropdown ? (
                 <FaTimes onClick={toggleAboutDropdown} className={styles.plusIcon} />
@@ -42,11 +42,11 @@ const NavigationMenu = () => {
               )}
               {showAboutDropdown && (
                 <div className={styles.aboutDropdown}>
-                  <Link to="/company-profile">Company Profile</Link>
+                  <Link to="/about">Company Profile</Link>
                 </div>
               )}
             </div>
-            <Link to="/shipping">Shipping</Link>
+            <Link to="/testimonials">Testimonials</Link>
             <div className='nav-btns'>
                 <button className={styles.navBtn}>Sign In</button>
                 <button className={styles.navBtn}>Sign Up</button>

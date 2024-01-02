@@ -107,41 +107,61 @@ const CarModal = ({ car, isOpen, onClose }) => {
   };
 
   return (
-     <Modal open={isOpen} onClose={onClose} sx={{ width: '90%', maxWidth: 'md' }}>
-      <Box className={styles.carModal} sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-30%, -50%)', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 24, p: 4, width: '100%' }}>
+     <Modal open={isOpen} onClose={onClose} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box className={styles.carModal} sx={{ width:'75%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 24, p: 4}}>
         <Card>
           <CardMedia component="img" height="300" image={car.imageUrl} alt={`Car ${car.id}`} />
           <CardContent>
-            <Tabs value={activeTab} onChange={handleTabChange} centered>
-              <Tab label="Basic Information" />
-              <Tab label="Specs" />
-              <Tab label="Mechanical Checkpoints" />
+            <Tabs value={activeTab} onChange={handleTabChange} centered sx={{ borderBottom: '1px solid #ccc' }}>
+              <Tab label="Basic Information" sx={{ fontWeight: activeTab === 0 ? 'bold' : 'normal' }} />
+              <Tab label="Specs" sx={{ fontWeight: activeTab === 1 ? 'bold' : 'normal' }} />
+              <Tab label="Mechanical Checkpoints" sx={{ fontWeight: activeTab === 2 ? 'bold' : 'normal' }} />
             </Tabs>
 
-            {activeTab === 0 && (
-              <div>
-                <Typography variant="body1">Brand: {car.brand}</Typography>
-                <Typography variant="body1">Model: {car.model}</Typography>
-                <Typography variant="body1">Year: {car.year}</Typography>
-                <Typography variant="body1">FOB: ${car.fob.toLocaleString()}</Typography>
-                <Typography variant="body1">Chassis: {car.chassis}</Typography>
-                <Typography variant="body1">Mileage: {car.mileage}</Typography>
+            <Box sx={{textAlign: 'left' }}>
+              {activeTab === 0 && (
+              <div className={styles.tabContent}>
+                <div style={{ flex: '1', marginRight: '16px' }}>
+                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Brand: {car.brand}</Typography>
+                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Model: {car.model}</Typography>
+                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Year: {car.year}</Typography>
+                </div>
+                <div style={{ flex: '1' }}>
+                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>FOB: ${car.fob.toLocaleString()}</Typography>
+                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Chassis: {car.chassis}</Typography>
+                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Mileage: {car.mileage}</Typography>
+                </div>
               </div>
             )}
 
-            {activeTab === 1 && (
-              <div>
-                <Typography variant="body1">Engine: {car.specs.engine}</Typography>
-                <Typography variant="body1">Transmission: {car.specs.transmission}</Typography>
+
+             {activeTab === 1 && (
+              <div className={styles.tabContent}>
+                <div style={{ display: 'flex', padding: '16px', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+                  <div style={{ flex: '1', marginRight: '16px' }}>
+                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Engine: {car.specs.engine}</Typography>
+                  </div>
+                  <div style={{ flex: '1' }}>
+                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Transmission: {car.specs.transmission}</Typography>
+                  </div>
+                </div>
               </div>
             )}
 
             {activeTab === 2 && (
-              <div>
-                <Typography variant="body1">Brake System: {car.checkpoints.brakes}</Typography>
-                <Typography variant="body1">Suspension: {car.checkpoints.suspension}</Typography>
+              <div className={styles.tabContent}>
+                <div style={{ display: 'flex', padding: '16px', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
+                  <div style={{ flex: '1', marginRight: '16px' }}>
+                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Brake System: {car.checkpoints.brakes}</Typography>
+                  </div>
+                  <div style={{ flex: '1' }}>
+                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Suspension: {car.checkpoints.suspension}</Typography>
+                  </div>
+                </div>
               </div>
             )}
+
+            </Box>
           </CardContent>
         </Card>
       </Box>
