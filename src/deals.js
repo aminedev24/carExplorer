@@ -3,15 +3,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styles from './responsiveModal.module.css';
 import { 
   Button, 
-  Container, 
-  Select, 
-  MenuItem, 
-  InputLabel, 
-  FormControl, 
-  Slider, 
-  Typography,Card ,
+  Typography,
+  Card ,
   CardContent,
   Menu,
+  Modal,
+  Tabs, 
+  Tab,
+  Box,
   CardMedia} from '@mui/material';
 
 
@@ -52,53 +51,120 @@ const cardData = [
 ];
 
 const csvData = `
-Brand,Model,Year,FOB_Min,FOB_Max
-TOYOTA,land cruiser,2023,108600,113888
-TOYOTA,toyota DYNA,2003,6280,6800
-MITSUBISHI,FUSO FIGHTER MIGNON,1999,14000,15500
-TOYOTA,toyota NOAH,2008,1500,1960
-TOYOTA,LAND CRUISER PRADO,2018,26000,26675
-TOYOTA,LAND CRUISER PRADO14,2014,17900,18800
-TOYOTA,toyota Carina,2001,2210,2590
-MERCEDES BENZ,mercedes E-class,2017,14800,15600
-MERCEDES BENZ,mercedes G-class,2003,17500,18930
-MITSUBISHI,FUSO FIGHTER,2003,8600,8800
+Brand,Model,Year,FOB_Min,FOB_Max,Chassis,Mileage,Engine,Transmission,Brakes,Suspension
+TOYOTA,land cruiser,2023,108600,113888,JT123456,50000,4.5L V8,Automatic,Disc,Independent
+TOYOTA,toyota DYNA,2003,6280,6800,WU789012,120000,3.0L Diesel,Manual,Drum,Solid Axle
+MITSUBISHI,FUSO FIGHTER MIGNON,1999,14000,15500,FM456789,80000,6.0L Diesel,Automatic,Disc,Independent
+TOYOTA,toyota NOAH,2008,1500,1960,AR012345,90000,2.0L Petrol,Automatic,Disc,MacPherson Strut
+TOYOTA,LAND CRUISER PRADO,2018,26000,26675,JTEBU3FJ5K2222222,30000,3.5L V6,Automatic,Disc,Independent
+TOYOTA,LAND CRUISER PRADO14,2014,17900,18800,JTEBU3FJ1EK123456,75000,4.0L V6,Automatic,Disc,Independent
+TOYOTA,toyota Carina,2001,2210,2590,AT012345,110000,1.8L Petrol,Automatic,Disc,MacPherson Strut
+MERCEDES BENZ,mercedes E-class,2017,14800,15600,WDDHF5KB8DA765432,40000,3.0L V6,Automatic,Disc,Independent
+MERCEDES BENZ,mercedes G-class,2003,17500,18930,WDCYR49E43X123456,90000,5.0L V8,Automatic,Disc,Live Axle
+MITSUBISHI,FUSO FIGHTER,2003,8600,8800,FP456789,60000,6.4L Diesel,Manual,Drum,Solid Axle
 `;
 
 const rows = csvData.trim().split('\n').slice(1); // Skip header row
 
 const cardsData = rows.map((row, id) => {
-  const [brand, model, year, fobMin, fobMax] = row.split(',');
+  const [brand, model, year, fobMin, fobMax, chassis, mileage, engine, transmission, brakes, suspension] = row.split(',');
 
   const formattedModel = model.replace(/\s+/g, '').toLocaleLowerCase();
-  console.log(`formattedModel ${formattedModel}`);
   const imageUrl = `img/deals/${formattedModel}.jpg`;
 
-  // Convert fobMin and fobMax to numbers
   const parsedFobMin = parseFloat(fobMin, 10);
   const parsedFobMax = parseFloat(fobMax, 10);
 
-  // Format the FOB prices and prices using toLocaleString
-  const formattedFobMin = parsedFobMin.toLocaleString();
-  const formattedFobMax = parsedFobMax.toLocaleString();
-
-  console.log(formattedFobMax, formattedFobMin);
-
-  return {
+  const car = {
     id: id + 1,
     brand: brand.trim(),
     model: model.trim(),
     year: parseFloat(year.trim(), 10),
     fob: parsedFobMin,
     price: parsedFobMax,
-    
-    imageUrl: imageUrl,
+    imageUrl,
+    chassis: chassis.trim(),
+    mileage: parseFloat(mileage.trim(), 10),
+    specs: {
+      engine: engine.trim(),
+      transmission: transmission.trim(),
+    },
+    checkpoints: {
+      brakes: brakes.trim(),
+      suspension: suspension.trim(),
+    },
   };
+
+  return car;
 });
+
+const CarModal = ({ car, isOpen, onClose }) => {
+
+  const [activeTab, setActiveTab] = useState(0);
+  console.log(car)
+  const handleTabChange = (event, newValue) => {
+    setActiveTab(newValue);
+  };
+
+  return (
+     <Modal open={isOpen} onClose={onClose} sx={{ width: '90%', maxWidth: 'md' }}>
+      <Box className={styles.carModal} sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-30%, -50%)', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 24, p: 4, width: '100%' }}>
+        <Card>
+          <CardMedia component="img" height="300" image={car.imageUrl} alt={`Car ${car.id}`} />
+          <CardContent>
+            <Tabs value={activeTab} onChange={handleTabChange} centered>
+              <Tab label="Basic Information" />
+              <Tab label="Specs" />
+              <Tab label="Mechanical Checkpoints" />
+            </Tabs>
+
+            {activeTab === 0 && (
+              <div>
+                <Typography variant="body1">Brand: {car.brand}</Typography>
+                <Typography variant="body1">Model: {car.model}</Typography>
+                <Typography variant="body1">Year: {car.year}</Typography>
+                <Typography variant="body1">FOB: ${car.fob.toLocaleString()}</Typography>
+                <Typography variant="body1">Chassis: {car.chassis}</Typography>
+                <Typography variant="body1">Mileage: {car.mileage}</Typography>
+              </div>
+            )}
+
+            {activeTab === 1 && (
+              <div>
+                <Typography variant="body1">Engine: {car.specs.engine}</Typography>
+                <Typography variant="body1">Transmission: {car.specs.transmission}</Typography>
+              </div>
+            )}
+
+            {activeTab === 2 && (
+              <div>
+                <Typography variant="body1">Brake System: {car.checkpoints.brakes}</Typography>
+                <Typography variant="body1">Suspension: {car.checkpoints.suspension}</Typography>
+              </div>
+            )}
+          </CardContent>
+        </Card>
+      </Box>
+    </Modal>
+  );
+};
 
 const BestDealsSection = ({ filteredData,windowWidth }) => {
   //console.log(filteredData);
   const [dataToDisplay, setDataToDisplay] = useState(filteredData);
+
+  const [selectedCar, setSelectedCar] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (car) => {
+    setSelectedCar(car);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCar(null);
+    setIsModalOpen(false);
+  };
 
 
 useEffect(() => {
@@ -120,7 +186,7 @@ useEffect(() => {
       <div className="row mt-3">
         {dataToDisplay && dataToDisplay.length > 0 ? (
           dataToDisplay.map((card) => (
-            <div key={card.id} className="col-md-4 mb-3">
+            <div key={card.id} className="col-md-4 mb-3" onClick={() => openModal(card)}>
               <Card>
                 <CardMedia
                   component="img"
@@ -182,8 +248,12 @@ useEffect(() => {
             <blockquote cite="https://web.facebook.com/profile.php?id=100087193303945" class="fb-xfbml-parse-ignore"><a href="https://web.facebook.com/profile.php?id=100087193303945">Ichinomiya Motors</a></blockquote>
         </div>
         </div>
-          
       }
+
+      {selectedCar && (
+        <CarModal car={selectedCar} isOpen={isModalOpen} onClose={closeModal} />
+      )}
+
 
     </div>
   );

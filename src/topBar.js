@@ -24,7 +24,7 @@ const TopBar = () => {
   return (
     <div className="top-bar">
       <div className="left-section">
-        <img src="/img/logo.png" alt="Logo" className="logo" />
+        <img src="img/logo.png" alt="Logo" className="logo" />
         {windowWidth > 1400 && <ModalHeader/>}
       </div>
       <div className={`center-section ${windowWidth > 1400 ? 'move-right' : ''}`}>

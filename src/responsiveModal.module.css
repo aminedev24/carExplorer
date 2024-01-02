@@ -101,6 +101,12 @@
     
 }
 
+@media screen and (max-width:1000) {
+    .carModal {
+        transform: translate(-37%,-50%);
+    }
+    
+}
 @media screen and (min-width: 760px) and  (max-width:1000px) {
     .dealsAndcontainer {
         width: 100% !important;
