@@ -99,16 +99,16 @@ const cardsData = rows.map((row, id) => {
 });
 
 const CarModal = ({ car, isOpen, onClose }) => {
-
   const [activeTab, setActiveTab] = useState(0);
-  console.log(car)
+
   const handleTabChange = (event, newValue) => {
     setActiveTab(newValue);
   };
 
   return (
-     <Modal open={isOpen} onClose={onClose} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-      <Box className={styles.carModal} sx={{ width:'75%', position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', borderRadius: '8px', boxShadow: 24, p: 4}}>
+    <Modal open={isOpen} onClose={onClose} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box className={styles.carModal} sx={{ bgcolor: 'background.paper', boxShadow: 24, p: 4}}>
+
         <Card>
           <CardMedia component="img" height="300" image={car.imageUrl} alt={`Car ${car.id}`} />
           <CardContent>
@@ -118,49 +118,61 @@ const CarModal = ({ car, isOpen, onClose }) => {
               <Tab label="Mechanical Checkpoints" sx={{ fontWeight: activeTab === 2 ? 'bold' : 'normal' }} />
             </Tabs>
 
-            <Box sx={{textAlign: 'left' }}>
+            <Box className={styles.tabContentContainer}>
               {activeTab === 0 && (
-              <div className={styles.tabContent}>
-                <div style={{ flex: '1', marginRight: '16px' }}>
-                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Brand: {car.brand}</Typography>
-                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Model: {car.model}</Typography>
-                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Year: {car.year}</Typography>
-                </div>
-                <div style={{ flex: '1' }}>
-                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>FOB: ${car.fob.toLocaleString()}</Typography>
-                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Chassis: {car.chassis}</Typography>
-                  <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Mileage: {car.mileage}</Typography>
-                </div>
-              </div>
-            )}
-
-
-             {activeTab === 1 && (
-              <div className={styles.tabContent}>
-                <div style={{ display: 'flex', padding: '16px', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
-                  <div style={{ flex: '1', marginRight: '16px' }}>
-                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Engine: {car.specs.engine}</Typography>
+                <div className={styles.tabContent}>
+                  <div className={styles.tabContentColumn}>
+                    <Typography variant="body1" className={styles.title}>Brand:</Typography>
+                    <Typography variant="body1">{car.brand}</Typography>
                   </div>
-                  <div style={{ flex: '1' }}>
-                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Transmission: {car.specs.transmission}</Typography>
+                  <div className={styles.tabContentColumn}>
+                    <Typography variant="body1" className={styles.title}>Model:</Typography>
+                    <Typography variant="body1">{car.model}</Typography>
                   </div>
-                </div>
-              </div>
-            )}
-
-            {activeTab === 2 && (
-              <div className={styles.tabContent}>
-                <div style={{ display: 'flex', padding: '16px', border: '1px solid #ccc', borderRadius: '8px', backgroundColor: '#f9f9f9' }}>
-                  <div style={{ flex: '1', marginRight: '16px' }}>
-                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Brake System: {car.checkpoints.brakes}</Typography>
+                  <div className={styles.tabContentColumn}>
+                    <Typography variant="body1" className={styles.title}>Year:</Typography>
+                    <Typography variant="body1">{car.year}</Typography>
                   </div>
-                  <div style={{ flex: '1' }}>
-                    <Typography variant="body1" style={{ marginBottom: '8px', fontWeight: 'bold' }}>Suspension: {car.checkpoints.suspension}</Typography>
+                  <div className={styles.tabContentColumn}>
+                    <Typography variant="body1" className={styles.title}>FOB:</Typography>
+                    <Typography variant="body1">${car.fob.toLocaleString()}</Typography>
+                  </div>
+                  <div className={styles.tabContentColumn}>
+                    <Typography variant="body1" className={styles.title}>Chassis:</Typography>
+                    <Typography variant="body1">{car.chassis}</Typography>
+                  </div>
+                  <div className={styles.tabContentColumn}>
+                    <Typography variant="body1" className={styles.title}>Mileage:</Typography>
+                    <Typography variant="body1">{car.mileage}</Typography>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
+              {activeTab === 1 && (
+                <div className={styles.tabContent}>
+                  <div className={styles.tabContentRow}>
+                    <Typography variant="body1" className={styles.title}>Engine:</Typography>
+                    <Typography variant="body1">{car.specs.engine}</Typography>
+                  </div>
+                  <div className={styles.tabContentRow}>
+                    <Typography variant="body1" className={styles.title}>Transmission:</Typography>
+                    <Typography variant="body1">{car.specs.transmission}</Typography>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 2 && (
+                <div className={styles.tabContent}>
+                  <div className={styles.tabContentRow}>
+                    <Typography variant="body1" className={styles.title}>Brake System:</Typography>
+                    <Typography variant="body1">{car.checkpoints.brakes}</Typography>
+                  </div>
+                  <div className={styles.tabContentRow}>
+                    <Typography variant="body1" className={styles.title}>Suspension:</Typography>
+                    <Typography variant="body1">{car.checkpoints.suspension}</Typography>
+                  </div>
+                </div>
+              )}
             </Box>
           </CardContent>
         </Card>
@@ -168,6 +180,7 @@ const CarModal = ({ car, isOpen, onClose }) => {
     </Modal>
   );
 };
+
 
 const BestDealsSection = ({ filteredData,windowWidth }) => {
   //console.log(filteredData);
