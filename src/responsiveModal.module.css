@@ -24,6 +24,14 @@
 .tabContent {
     display: flex;
     margin: 20px;
+    justify-content: center !important;
+}
+
+.tab:hover {
+    outline: none;
+    /* Remove default outline */
+    color: #f0f0f0 !important;
+    /* Set a background color for the selected tab */
 }
 
 .tabContentColumn {
@@ -43,6 +51,16 @@
 .title {
     margin-bottom: 8px !important;
     font-weight: bold !important;
+}
+
+@media screen and (max-width: 768px) {
+    .tabContent {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            place-items: center;
+            /* You can adjust the column layout as needed */
+        }
+    
 }
 
 .rangeSliderContainer {

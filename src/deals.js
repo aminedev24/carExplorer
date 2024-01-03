@@ -113,9 +113,9 @@ const CarModal = ({ car, isOpen, onClose }) => {
           <CardMedia component="img" height="300" image={car.imageUrl} alt={`Car ${car.id}`} />
           <CardContent>
             <Tabs value={activeTab} onChange={handleTabChange} centered sx={{ borderBottom: '1px solid #ccc' }}>
-              <Tab label="Basic Information" sx={{ fontWeight: activeTab === 0 ? 'bold' : 'normal' }} />
-              <Tab label="Specs" sx={{ fontWeight: activeTab === 1 ? 'bold' : 'normal' }} />
-              <Tab label="Mechanical Checkpoints" sx={{ fontWeight: activeTab === 2 ? 'bold' : 'normal' }} />
+              <Tab className={styles.tab} label="Basic Information" sx={{ fontWeight: activeTab === 0 ? 'bold' : 'normal' }} />
+              <Tab className={styles.tab} label="Specs" sx={{ fontWeight: activeTab === 1 ? 'bold' : 'normal' }} />
+              <Tab className={styles.tab} label="Mechanical Checkpoints" sx={{ fontWeight: activeTab === 2 ? 'bold' : 'normal' }} />
             </Tabs>
 
             <Box className={styles.tabContentContainer}>
@@ -150,11 +150,11 @@ const CarModal = ({ car, isOpen, onClose }) => {
 
               {activeTab === 1 && (
                 <div className={styles.tabContent}>
-                  <div className={styles.tabContentRow}>
+                  <div className={styles.tabContentColumn}>
                     <Typography variant="body1" className={styles.title}>Engine:</Typography>
                     <Typography variant="body1">{car.specs.engine}</Typography>
                   </div>
-                  <div className={styles.tabContentRow}>
+                  <div className={styles.tabContentColumn}>
                     <Typography variant="body1" className={styles.title}>Transmission:</Typography>
                     <Typography variant="body1">{car.specs.transmission}</Typography>
                   </div>
@@ -163,11 +163,11 @@ const CarModal = ({ car, isOpen, onClose }) => {
 
               {activeTab === 2 && (
                 <div className={styles.tabContent}>
-                  <div className={styles.tabContentRow}>
+                  <div className={styles.tabContentColumn}>
                     <Typography variant="body1" className={styles.title}>Brake System:</Typography>
                     <Typography variant="body1">{car.checkpoints.brakes}</Typography>
                   </div>
-                  <div className={styles.tabContentRow}>
+                  <div className={styles.tabContentColumn}>
                     <Typography variant="body1" className={styles.title}>Suspension:</Typography>
                     <Typography variant="body1">{car.checkpoints.suspension}</Typography>
                   </div>
