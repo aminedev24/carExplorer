@@ -25,7 +25,10 @@
     display: flex;
     margin: 20px;
     justify-content: center !important;
+    flex-wrap: wrap;
 }
+
+
 
 .tab:hover {
     outline: none;
@@ -40,14 +43,6 @@
     
 }
 
-.tabContentRow {
-    display: flex;
-    padding: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-}
-
 .title {
     margin-bottom: 8px !important;
     font-weight: bold !important;
@@ -55,10 +50,19 @@
 
 @media screen and (max-width: 768px) {
     .tabContent {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            place-items: center;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             /* You can adjust the column layout as needed */
+        }
+
+        .tabContentColumn {
+            flex: 1 1 calc(50% - 16px);
+        }
+
+        .tabs {
+            overflow-y: scroll !important;
+            white-space: nowrap;
         }
     
 }

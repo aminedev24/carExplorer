@@ -111,7 +111,7 @@ const CarModal = ({ car, isOpen, onClose }) => {
 
         <Card>
           <CardMedia component="img" height="300" image={car.imageUrl} alt={`Car ${car.id}`} />
-          <CardContent>
+          <CardContent className={styles.tabs}>
             <Tabs value={activeTab} onChange={handleTabChange} centered sx={{ borderBottom: '1px solid #ccc' }}>
               <Tab className={styles.tab} label="Basic Information" sx={{ fontWeight: activeTab === 0 ? 'bold' : 'normal' }} />
               <Tab className={styles.tab} label="Specs" sx={{ fontWeight: activeTab === 1 ? 'bold' : 'normal' }} />
