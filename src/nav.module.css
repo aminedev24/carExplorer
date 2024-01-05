@@ -152,6 +152,17 @@
 /* Adjusted styles for small screens */
 @media only screen and (max-width: 767px) {
 
+    .navBtns {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .navBtns:first-child {
+            background-color: #4b807b;
+            border: #4b807b;
+    }
+
     .nav a,
     .navAbout {
         padding:20px 03px;

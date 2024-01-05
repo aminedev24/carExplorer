@@ -47,7 +47,7 @@ const NavigationMenu = () => {
               )}
             </div>
             <Link to="/testimonials">Testimonials</Link>
-            <div className='nav-btns'>
+            <div className={styles.navBtns}>
                 <button className={styles.navBtn}>Sign In</button>
                 <button className={styles.navBtn}>Sign Up</button>
             </div>
