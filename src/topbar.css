@@ -99,6 +99,10 @@
     .logo {
         width: 80px;
     }
+
+    .center-section {
+
+    }
     
 }
 
@@ -120,6 +124,7 @@
         /* Back to the default row direction */
         justify-content: space-between;
         /* Space between left and right sections */
+        font-size: 13px;
     }
 
     
