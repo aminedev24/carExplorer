@@ -48,6 +48,16 @@
     font-weight: bold !important;
 }
 
+/* Set a maximum width for the tab content */
+.tabContentColumn,
+.tabContentRow {
+    max-width: 300px;
+    /* Adjust the value as needed */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
 @media screen and (max-width: 768px) {
     .tabContent {
             display: flex;
@@ -56,14 +66,15 @@
             /* You can adjust the column layout as needed */
         }
 
-        .tabContentColumn {
-            flex: 1 1 calc(50% - 16px);
-        }
+    .tabContentColumn, .tabContentRow {
+        flex: 1 1 calc(50% - 16px);
+        max-width: none; /* Reset max-width for smaller screens */
+    }
 
-        .tabs {
-            overflow-y: scroll !important;
-            white-space: nowrap;
-        }
+    .tabs {
+        overflow-y: scroll !important;
+        white-space: nowrap;
+    }
     
 }
 
