@@ -178,6 +178,8 @@
         text-align: center;
     }
 
+   
+
 }
 
 
@@ -254,9 +256,6 @@ input {
 
 
 @media screen and (min-width: 768px) {
-    .filterContainer {
-        display: none;
-    }
 
     .searchIcon {
         position: absolute;
@@ -330,6 +329,10 @@ input {
     .modal {
         width: 25%;
         position: relative;
+    }
+
+    .filterContainer {
+        display: none;
     }
 
     .dealsAndcontainer {
@@ -509,6 +512,16 @@ button:hover {
     
 }
 
+
+@media screen and (max-width: 900px) {
+    .modalHeader {
+        width: 80%;
+        margin: 20px auto 0;
+        position: relative;
+        justify-content: space-between;
+    }
+    
+}
 
 /* Add this to your existing ResponsiveModal.css or create a new CSS file */
 .priceSection {

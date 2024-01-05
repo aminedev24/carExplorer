@@ -64,11 +64,10 @@
 }
 
 .main-title {
-    background-color: #2196F3;
-    color: white;
+    color: #000;
     border-radius: 15px 15px 0 0;
     text-align: center;
-    padding: 1rem;
+    padding: 2.5rem;
 }
 
 .main-image {
@@ -80,7 +79,7 @@
 
 .overlay-text {
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     padding: 1rem;
@@ -156,4 +155,26 @@
     .text-container {
         margin-right: 0;
     }
+}
+
+@media screen and (min-width: 1001px){
+
+    .overlay-text h5 {
+            font-size: 3.5rem;
+        }
+    
+        .overlay-text p {
+            font-size: 2rem;
+        }
+    
+}
+
+
+
+@media screen and (max-width:768px){
+
+    .overlay-text {
+        top: 75%;
+    }
+    
 }

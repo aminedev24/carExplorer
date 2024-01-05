@@ -97,13 +97,18 @@
 
 @media screen and (max-width: 800px) {
     .logo {
-        max-width: 80%;
+        max-width: 125px;
     }
 
-    .center-section {
-        left: 20%;
+   .right-section {
+    display: none;
+   }
+
+
+   .center-section {
+        right: 10%;
         position: relative;
-    }
+   }
 
     .left-section,
     .center-section,
