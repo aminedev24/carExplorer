@@ -95,6 +95,13 @@
     background-color: #2980b9;
 }
 
+@media screen and (max-width:500px) {
+    .logo {
+        width: 80px;
+    }
+    
+}
+
 @media screen and (max-width: 800px) {
     .logo {
         max-width: 125px;
